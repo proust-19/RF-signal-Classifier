@@ -5,9 +5,6 @@ from .preprocessing import normalize_iq, extract_statistical_features
 
 
 class EmbeddedInferenceEngine:
-
-    # Designed for resource-constrained satellite payloads.
-
     def __init__(self, model_path: str, use_onnx: bool = True):
         self.use_onnx = use_onnx
         if use_onnx:
@@ -24,8 +21,7 @@ class EmbeddedInferenceEngine:
         iq: NDArray[np.complex64],
         window_size: int = 1024,
     ) -> dict:
-        
-        # Preprocess
+
         x = self._preprocess(iq, window_size)
 
         if self.use_onnx:
@@ -35,7 +31,7 @@ class EmbeddedInferenceEngine:
                 "Pure-numpy inference requires manual weight loading"
             )
 
-        probs = np.exp(probs) / np.sum(np.exp(probs), axis=1, keepdims=True)  # softmax
+        probs = np.exp(probs) / np.sum(np.exp(probs), axis=1, keepdims=True)
         pred_class = int(np.argmax(probs[0]))
         confidence = float(probs[0][pred_class])
 

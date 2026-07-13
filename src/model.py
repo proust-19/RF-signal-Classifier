@@ -1,9 +1,3 @@
-"""Lightweight RF signal classifier models.
-
-Provides both CNN and CNN-LSTM architectures optimized for
-embedded deployment with configurable complexity.
-"""
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -42,13 +36,6 @@ class RFCNN(nn.Module):
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Forward pass.
-
-        Args:
-            x: (batch, channels, seq_len) - I/Q samples
-        Returns:
-            (batch, num_classes) logits
-        """
         x = self.features(x)
         x = x.squeeze(-1)
         return self.classifier(x)
@@ -58,10 +45,7 @@ class RFCNN(nn.Module):
 
 
 class RFCNNLSTM(nn.Module):
-    """CNN-LSTM hybrid for sequential RF signal classification.
-
-    CNN extracts local features, LSTM captures temporal dependencies.
-    """
+    """CNN-LSTM hybrid for sequential RF signal class."""
 
     def __init__(
         self,

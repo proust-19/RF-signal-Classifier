@@ -1,9 +1,3 @@
-"""RF signal preprocessing and feature extraction pipeline.
-
-Handles I/Q data normalization, spectral features, and time-domain
-features suitable for ML classification on embedded hardware.
-"""
-
 import numpy as np
 from numpy.typing import NDArray
 
@@ -40,11 +34,6 @@ def compute_spectrogram(
 
 
 def extract_statistical_features(iq: NDArray[np.complex64]) -> NDArray[np.float32]:
-    """Extract lightweight statistical features for embedded inference.
-
-    Features: mean I, mean Q, std I, std Q, spectral centroid,
-    instantaneous amplitude stats, zero-crossing rate.
-    """
     real = iq.real.astype(np.float32)
     imag = iq.imag.astype(np.float32)
 

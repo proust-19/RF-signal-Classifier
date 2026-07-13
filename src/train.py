@@ -18,7 +18,6 @@ def train_one_epoch(
     optimizer: optim.Optimizer,
     device: torch.device,
 ) -> tuple[float, float]:
-    """Train for one epoch. Returns (loss, accuracy)."""
     model.train()
     total_loss = 0.0
     correct = 0
@@ -47,7 +46,6 @@ def evaluate(
     criterion: nn.Module,
     device: torch.device,
 ) -> tuple[float, float]:
-    """Evaluate model. Returns (loss, accuracy)."""
     model.eval()
     total_loss = 0.0
     correct = 0
