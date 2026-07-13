@@ -9,7 +9,7 @@ def export_onnx(
     model: nn.Module,
     save_path: str,
     input_shape: tuple = (1, 2, 1024),
-    opset_version: int = 13,
+    opset_version: int = 18,
 ) -> dict:
     """Export PyTorch model to ONNX."""
     model.eval()
@@ -21,8 +21,8 @@ def export_onnx(
         save_path,
         input_names=["iq_input"],
         output_names=["prediction"],
-        dynamic_axes={"iq_input": {0: "batch"}, "prediction": {0: "batch"}},
         opset_version=opset_version,
+        dynamo=False,
     )
 
     import os
@@ -43,7 +43,7 @@ def quantize_onnx(
     calibration_data: np.ndarray | None = None,
 ) -> dict:
     """Apply dynamic quantization to ONNX model for int8 inference."""
-    
+
     try:
         import onnxruntime as ort
         from onnxruntime.quantization import quantize_dynamic, QuantType
