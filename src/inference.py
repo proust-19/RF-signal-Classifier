@@ -1,9 +1,3 @@
-"""Lightweight inference engine for embedded deployment.
-
-Provides a simple, dependency-free inference path using only
-numpy for environments without PyTorch/ONNX runtime.
-"""
-
 import numpy as np
 from numpy.typing import NDArray
 
@@ -11,10 +5,8 @@ from .preprocessing import normalize_iq, extract_statistical_features
 
 
 class EmbeddedInferenceEngine:
-    """Minimal inference engine using only numpy + onnxruntime.
 
-    Designed for resource-constrained satellite payloads.
-    """
+    # Designed for resource-constrained satellite payloads.
 
     def __init__(self, model_path: str, use_onnx: bool = True):
         self.use_onnx = use_onnx
@@ -32,15 +24,7 @@ class EmbeddedInferenceEngine:
         iq: NDArray[np.complex64],
         window_size: int = 1024,
     ) -> dict:
-        """Classify an I/Q signal window.
-
-        Args:
-            iq: Complex I/Q samples
-            window_size: Expected input length
-
-        Returns:
-            Dict with predicted class, confidence, and all probabilities.
-        """
+        
         # Preprocess
         x = self._preprocess(iq, window_size)
 

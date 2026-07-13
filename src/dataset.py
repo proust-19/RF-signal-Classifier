@@ -21,7 +21,6 @@ SIGNAL_TYPES = {
 
 
 class RFDataset(Dataset):
-    """PyTorch dataset for RF signal classification."""
 
     def __init__(
         self,

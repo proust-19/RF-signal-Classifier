@@ -1,8 +1,4 @@
-"""ONNX export and quantization for embedded deployment.
-
-Supports full-precision and int8-quantized ONNX models
-suitable for edge inference on satellite payloads.
-"""
+"""ONNX export and quantization for embedded deployment."""
 
 import torch
 import torch.nn as nn
@@ -15,10 +11,7 @@ def export_onnx(
     input_shape: tuple = (1, 2, 1024),
     opset_version: int = 13,
 ) -> dict:
-    """Export PyTorch model to ONNX.
-
-    Returns export metadata including model size.
-    """
+    """Export PyTorch model to ONNX."""
     model.eval()
     dummy = torch.randn(*input_shape)
 
@@ -49,10 +42,8 @@ def quantize_onnx(
     save_path: str,
     calibration_data: np.ndarray | None = None,
 ) -> dict:
-    """Apply dynamic quantization to ONNX model for int8 inference.
-
-    Reduces model size ~4x and speeds up inference on edge hardware.
-    """
+    """Apply dynamic quantization to ONNX model for int8 inference."""
+    
     try:
         import onnxruntime as ort
         from onnxruntime.quantization import quantize_dynamic, QuantType
